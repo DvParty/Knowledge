@@ -30,10 +30,9 @@
 
 2. Process Address Space
     - 프로세스는 단순한 프로그램 이상의 정보를 갖는다.
-    - 메모리 상의 프로세스    
-    ![process_address_space](https://steemitimages.com/400x0//https://raw.githubusercontent.com/DvParty/Knowledge/master/ProcessThread20180519/imgs/process_address_space.png)  
-    *[그림 1] Process 메모리 구조*
-        <!-- <figure><img src="https://raw.githubusercontent.com/DvParty/Knowledge/master/ProcessThread20180519/imgs/process_address_space.png" width="400"/><figcaption>[그림 1] Process 메모리 구조</i></figcaption></figure> -->
+    - 메모리 상의 프로세스  
+            ![process_address_space](https://steemitimages.com/400x0//https://raw.githubusercontent.com/DvParty/Knowledge/master/ProcessThread20180519/imgs/process_address_space.png)  
+            *[그림 1] Process 메모리 구조*
     - 동적으로 변하는 영역  
     Stack: 로컬변수, 인자(Params/args)  
     Heap: 동적할당 메모리
@@ -43,4 +42,5 @@
 
 3. Process Life Cycle
     - 프로세스는 메모리에 올라온 순간부터 다음과 같은 생명 주기를 거친다.  
-        <figure><img src="https://raw.githubusercontent.com/DvParty/Knowledge/master/ProcessThread20180519/imgs/process_life_cycle.png" width="500"/><figcaption><i>[그림2] Process 생명주기</i></figcaption></figure>
+            ![process_life_cycle](https://steemitimages.com/500x0//https://raw.githubusercontent.com/DvParty/Knowledge/master/ProcessThread20180519/imgs/process_life_cycle.png)  
+            *[그림2] Process 생명주기*
