@@ -44,7 +44,7 @@
 
 3. Process Life Cycle
     - 프로세스는 메모리에 올라온 순간부터 다음과 같은 생명 주기를 거친다.  
-        <figure>  
-        <img src="https://raw.githubusercontent.com/DvParty/Knowledge/master/ProcessThread20180519/imgs/process_life_cycle.png" width="500"/>  
+        <figure>
+        <img src="https://raw.githubusercontent.com/DvParty/Knowledge/master/ProcessThread20180519/imgs/process_life_cycle.png" width="500"/>
         <figcaption><i>[그림2] Process 생명주기</i></figcaption>
         </figure>
