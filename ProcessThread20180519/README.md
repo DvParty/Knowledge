@@ -44,3 +44,12 @@
     - 프로세스는 메모리에 올라온 순간부터 다음과 같은 생명 주기를 거친다.  
             ![process_life_cycle](https://steemitimages.com/500x0//https://raw.githubusercontent.com/DvParty/Knowledge/master/ProcessThread20180519/imgs/process_life_cycle.png)  
             *[그림2] Process 생명주기*
+
+
+4. Process Scheduling  
+한정된 메모리, CPU 성능으로 한번에 하나의 Process만을 실행할 수 없었던 과거 컴퓨팅 환경이, 기술 발전에 따라 Multi Process 환경으로 전환됨으로써 Process의 실행 순서를 결정하는 것이 주요 이슈로 떠올랐다.
+    - Context Switch  
+    : 실행중인 프로세스에서 다른 프로세스로 전환하는 과정  
+    : Context Switch는 시간이 오래 걸리기 때문에 오버헤드를 줄이는 것이 주요 이슈  
+    : 이는 스케쥴링 알고리즘을 활용하여 해결한다.  
+
