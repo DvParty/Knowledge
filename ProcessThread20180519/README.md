@@ -88,3 +88,38 @@
         - 부모와 다른 프로그램을 실행하기 위해서는 자식은 새로운 프로그램을 로드하는 시스템콜을 호출해야 한다. (execlp)
         - fork()를 호출한 부모는 자식이 종료되어 자식 프로세스의 리소스 반환을 기다려야 한다.  
         -> Zombie process, Orpahn process 등이 이와 관련된 주요 issue.
+
+    - Sample Code
+        ```cpp
+        int main()
+        {
+            pid_t pid;
+
+            // fork another process
+            pid = fork();
+            if(pid < 0){ 
+                // error occured
+                fprintf(stderr, "Fork Failed");
+                exit(-1);
+            }
+            else if(pid == 0){
+                // child process
+                execlp("/bin/pwd", "pwd", NULL);
+            }
+            else{
+                // parent process
+                wait(NULL);
+                printf("Child %d process complete", pid);
+                exit(0);
+            }
+        }
+        ```  
+        ![fork_image](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/fork_capture.png?raw=true)
+
+        - fork로 생성된 자식 프로세스는 부모 프로세스와 동일한 코드를 수행한다.
+        - 자식 프로세스가 새로운 프로그램을 실행하기 위해 새로운 프로그램으로 로드한다.
+        - 해당 샘플에서는 pwd 명령어를 실행한다.
+        - 부모 프로세스는 자식프로세스가 종료하여 리소스를 반환할 때까지 대기한다.
+        - 부모 프로세스가 자식프로세스의 리소스 반환을 받을 않으면 자식프로세스는 프로그램이 종료되었음에도 프로세스를 종료하지 못하는 Zombie Process로 남게된다.
+        - 만약 자식프로세스가 종료되기 전에 부모프로세스가 종료되었을 경우 Orphan Process로 남게 된다.
+        - Orpahn Process의 경우 init process에서 부모프로세스를 새로 할당한다.
