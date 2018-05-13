@@ -300,7 +300,7 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
     100만원이 예금된 계좌가 있다. 여기서 A는 10만원을 출금하고, B는 5만원을 입금하려 한다. A와 B의 작업이 완료되면 계좌에 95만원이 있어야 하지만 동기화를 하지 않으면 다음과 같은 문제가 발생할 수 있다.  
         ![synchronization_motivation](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/synchronization_motivation.png?raw=true)  
         *[그림 6] 동기화를 하지 않은 계좌의 문제점*  
-    - A, B가 동시에 계좌에 점근하여 입출근을 했을 때 A는 90만원, B는 105만원이 예금된 계좌를 반환한다. 이러한 문제를 해결하기 위해 Multi Process/Thread 환경에서 동기화를 사용한다.
+    - A, B가 동시에 계좌에 접근하여 입출금을 했을 때 A는 90만원, B는 105만원이 예금된 계좌를 반환한다. 이러한 문제를 해결하기 위해 Multi Process/Thread 환경에서 동기화를 사용한다.
 
     - Critical Section Problem
         - Process/Thread가 동시에 접근하는 영역(리소스)를 Critical Section(임계영역)이라 한다.
