@@ -158,5 +158,73 @@
         : 미리 생성한 Thread를 할당(비용 절감)  
         : 한정된 자원 안에서 해결
 
-3. Sample Code
+3. Sample Code  
+JAVA는 기본적으로 Multi Thread를 지원한다.  
+    ![thread_java_case](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/thread_java_case.png?raw=true)   
+    - 하나의 객체를 n개의 Thread가 공유하는 방식.
+    - 객체 하나당 하나의 Thread가 존재하는 방식
+    - task별 Thread 생성
     
+        ```java
+        public class ExtendsThread extends Thread {
+
+            @Override
+            public void run(){
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy MM:mm:ss");
+
+                String tName = Thread.currentThread().getName();
+
+                for(int i = 0; i < 10; i++){
+                    System.out.println("[" + dateFormat.format(System.currentTimeMillis()) + "]" + tName + "::::" + i);
+
+                    try{
+                        Thread.sleep(500);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        ```
+        Thread Class를 상속하여 생석한 쓰레드는 그 자체로 쓰레드 객체이다.
+        
+        ```java
+        public class ImplementsRunnable implements Runnable{
+
+            @Override
+            public void run() {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy MM:mm:ss");
+
+                String tName = Thread.currentThread().getName();
+
+                for(int i = 0; i < 10; i++){
+                    System.out.println("[" + dateFormat.format(System.currentTimeMillis()) + "]" + tName + "::::" + i);
+
+                    try{
+                        Thread.sleep(500);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        ```
+        Runnalbe Interface를 구현하여 생성한 쓰레드는 Thread 객체 생성자의 인자로 전달되어 쓰레드 객체로 사용한다.
+
+        ```java
+        public class Main {
+
+            public static void main(String[] args){
+
+                ImplementsRunnable implementsRunnable = new ImplementsRunnable();
+                Thread imlRunnable = new Thread(implementsRunnable, "implementsRunnalbe");
+                imlRunnable.start();
+
+                ExtendsThread extendsThread = new ExtendsThread();
+                extendsThread.setName("extendsThread");
+                extendsThread.start();
+            }
+        }
+        ```
+        위 샘플 코드를 실행하면 다음과 같은 결과를 얻을 수 있다.  
+        ![thread_motivation_process_case](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/thread_sample_code_result.png?raw=true)
