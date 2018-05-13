@@ -259,8 +259,8 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
 
 
                 for(int i = 0; i < 2; i++) {
-            System.out.println("TaskNumber:" + this.nTask + " [" + dateFormat.format(System.currentTimeMillis()) + "]" + tName + "::::[ThreadId]::" + threadId + "::LOOP-" + i);
-        }
+                    System.out.println("TaskNumber:" + this.nTask + " [" + dateFormat.format(System.currentTimeMillis()) + "]" + tName + "::::[ThreadId]::" + threadId + "::LOOP-" + i);
+                }
             }
         }
         ```
