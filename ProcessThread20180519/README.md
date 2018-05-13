@@ -293,3 +293,30 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
         ![thread_sample_code_result](https://steemitimages.com/500x0//https://raw.githubusercontent.com/DvParty/Knowledge/ssipflow/ProcessThread20180519/imgs/thread_sample_code_pool_result.png)  
         -> 위 샘플 Thread Pool의 사이즈는 3으로 지정했다.  
         -> 실행 결과를 보면 10개의 task에 대하여 단 3개의 Thread가 실행되고 있음을 알 수 있다.  
+
+
+## Synchronization
+1. Motivation  
+    100만원이 예금된 계좌가 있다. 여기서 A는 10만원을 출금하고, B는 5만원을 입금하려 한다. A와 B의 작업이 완료되면 계좌에 95만원이 있어야 하지만 동기화를 하지 않으면 다음과 같은 문제가 발생할 수 있다.  
+        ![synchronization_motivation](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/synchronization_motivation.png?raw=true)  
+        *[그림 6] 동기화를 하지 않은 계좌의 문제점*  
+    - A, B가 동시에 계좌에 점근하여 입출근을 했을 때 A는 90만원, B는 105만원이 예금된 계좌를 반환한다. 이러한 문제를 해결하기 위해 Multi Process/Thread 환경에서 동기화를 사용한다.
+
+    - Critical Section Problem
+        - Process/Thread가 동시에 접근하는 영역(리소스)를 Critical Section(임계영역)이라 한다.
+        - Critical Section Problem을 해결하기 위해서는 다음 세가지 조건을 만족해야 한다.
+            * Mutual Exclusion  
+            : Critical Section에는 오직 하나의 Process 접근을 허용한다.
+            * Progress  
+            : Critical Section은 언제나 점유되어 있어야 한다.
+            * Bounded Wait  
+            : 프로세스가 임계구역에 접근하기 위해 대기하는 횟수는 제한되어야 한다.  
+            : 우선순위에 밀려 특정 프로세스를 실행하지 못하는 현상(starvation) 해결
+        - Critical Section Problem을 해결하기 위한 메커니즘
+            * Semaphore, Mutex(Binary semaphore - 0/1)
+            * 프로세스를 실행하기 위한 일종의 Flag라 할 수 있다.
+            * Integer로 표현한다.
+            * 임계영역 접근 시 Mutex를 변경하여 임계구역이 점유되었음을 표시한다.
+            * Process 종료 시 다시 Mutex를 변경하여 임계구역이 free임을 표시한다.
+            * C에서는 Mutex, Semaphore 자료구조를 라이브러리로 제공하고 있으며, JAVA에서는 synchronized 키워드로 동기화를 구현한다.
+        - 임계영역과 세마포어를 쉽게 설명하기 위해 임계영역은 화장실, 세마포어는 화장실의 열쇠로 많이 비유한다.
