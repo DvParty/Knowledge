@@ -1,4 +1,4 @@
-# OS - Thread
+# OS: Thread
 ## Overview  
  첫번째 주제는 Thread로, Thread의 개념 및 개발 시 신경써야 할 특징들에 대해서 알아볼 것입니다. 보통 Thread 실습 시 C언어를 사용하지만, 이번 Sample Code는 저희 그룹의 주력 언어인 JAVA를 사용할 것입니다. 기본적으로 Thread는 Process에 대한 이해가 필요하기 때문에 Process 선행학습 역시 포함되어 있습니다.  
    
@@ -239,7 +239,7 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
         - 앞서 설명한 바와 같이 이러한 환경에서는 Thread Pool을 사용하는 것이 효과적이다.
         - Thread Pool이란 미리 생성한 Thread들의 집합으로, Thread를 생성할 때 소비되는 불필요한 비용을 절감할 수 있다.
         - 물론 Task의 수를 고려하지 않고 무작정 Thread Pool의 사이즈를 크게 할 경우 불필요한 메모리 낭비를 발생할 수 있으며, 노는thread 가 발생할 수도 있다.
-        - 다음은 10개의 Runnable task에 대해 사이즈 2의 Thread Pool이 Task들을 실행하는 샘플코드이다.
+        - 다음은 10개의 Runnable task에 대해 사이즈 3의 Thread Pool이 10개의 Task를 실행하는 샘플코드이다.
 
         ```java
         public class RunnableForThreadPool implements Runnable{
@@ -300,7 +300,7 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
     100만원이 예금된 계좌가 있다. 여기서 A는 10만원을 출금하고, B는 5만원을 입금하려 한다. A와 B의 작업이 완료되면 계좌에 95만원이 있어야 하지만 동기화를 하지 않으면 다음과 같은 문제가 발생할 수 있다.  
         ![synchronization_motivation](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/synchronization_motivation.png?raw=true)  
         *[그림 6] 동기화를 하지 않은 계좌의 문제점*  
-    - A, B가 동시에 계좌에 점근하여 입출근을 했을 때 A는 90만원, B는 105만원이 예금된 계좌를 반환한다. 이러한 문제를 해결하기 위해 Multi Process/Thread 환경에서 동기화를 사용한다.
+    - A, B가 동시에 계좌에 접근하여 입출금을 했을 때 A는 90만원, B는 105만원이 예금된 계좌를 반환한다. 이러한 문제를 해결하기 위해 Multi Process/Thread 환경에서 동기화를 사용한다.
 
     - Critical Section Problem
         - Process/Thread가 동시에 접근하는 영역(리소스)를 Critical Section(임계영역)이라 한다.
