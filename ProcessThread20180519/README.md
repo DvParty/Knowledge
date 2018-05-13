@@ -13,7 +13,7 @@
 2. [Thread](#thread)  
     2-1. Thread가 필요한 이유?  
     2-2. Multi Thread  
-    2-3. Thread Handling  
+    2-3. Sample Code
 
 3. [Synchronization(동기화)](#synchronization)  
     3-1. 동기화가 필요한 이유?  
@@ -89,7 +89,7 @@
         - fork()를 호출한 부모는 자식이 종료되어 자식 프로세스의 리소스 반환을 기다려야 한다.  
         -> Zombie process, Orpahn process 등이 이와 관련된 주요 issue.
 
-    - Sample Code
+    - [Sample Code](https://github.com/DvParty/Knowledge/tree/ssipflow/ProcessThread20180519/sampleCode/sampleFork)
         ```cpp
         int main()
         {
@@ -123,3 +123,40 @@
         - 부모 프로세스가 자식프로세스의 리소스 반환을 받을 않으면 자식프로세스는 프로그램이 종료되었음에도 프로세스를 종료하지 못하는 Zombie Process로 남게된다.
         - 만약 자식프로세스가 종료되기 전에 부모프로세스가 종료되었을 경우 Orphan Process로 남게 된다.
         - Orpahn Process의 경우 init process에서 부모프로세스를 새로 할당한다.
+
+## Thread
+프로세스 내부의 실행흐름.
+
+1. Thread가 필요한 이유?
+    - Process는 독립된 개체로서 별도의 자원을 사용한다.
+    - 이는 context switching 시 많은 오버헤드를 발생한다.
+    - 이를 해결하기 위한 방법으로 Thread를 사용한다.
+    - Example: Web server Case
+        - Process  
+        ![thread_motivation_process_case](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/thread_motivation_process_case.png?raw=true)  
+        *[그림 4] Request 동시처리 - Process Case*
+            - 요청을 처리하기 위해 요청의 갯수만큼 Process를 생성하는데 이는 불필요한 비용이 발생한다.
+
+        - Thread  
+        ![thread_motivation_thread_case](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/thread_motivation_thread_case.png?raw=true)   
+        *[그림 5] Request 동시처리 - Thread Case*
+            - Thread는 프로세스의 자원을 공유하여 두개의 요청을 동시 처리한다.
+
+2. Multi Thread
+    - Multi Thread는 Multi Process와 비교하여 다음과 같은 장점을 갖는다.
+        - 응답시간이 빠르다.
+        - 프로세스의 자원을 공유하기 때문에 오버헤드가 작다.
+        - Context Switching에 드는 비용이 적게 든다.
+
+    - Thread Handling  
+    쓰레드 역시 시스템콜(메소드)를 호출하여 생성하여 프로그램을 실행한다. 그렇다면 프로그램을 실행할 때 마다 실행할 프로그램의 갯수만큼 쓰레드를 생성해야 하는 것일까? 그렇지 않다. 물론 프로그램 실행에 문제는 없지만 이러한 방법은 프로세스의 자원을 공유하는 쓰레드 특성으로 인해 성능상 한계가 오기 때문이다. 멀티쓰레드 환경에서는 Thread Pool을 사용하는 것이 일반적이다.
+        - Program 갯수 마다 Thread를 생성  
+        : 한정된 자원  
+        : Thread 생성에 소모하는 자원 낭비
+
+        - Thread Pool  
+        : 미리 생성한 Thread를 할당(비용 절감)  
+        : 한정된 자원 안에서 해결
+
+3. Sample Code
+    
