@@ -290,6 +290,6 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
         }
         ```
         위 샘플 코드를 실행하면 다음과 같은 결과를 얻을 수 있다.  
-        ![thread_sample_code_result](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/thread_sample_code_pool_result.png?raw=true)  
+        ![thread_sample_code_result](https://steemitimages.com/500x0//https://raw.githubusercontent.com/DvParty/Knowledge/ssipflow/ProcessThread20180519/imgs/thread_sample_code_pool_result.png)  
         -> 위 샘플 Thread Pool의 사이즈는 3으로 지정했다.  
         -> 실행 결과를 보면 10개의 task에 대하여 단 3개의 Thread가 실행되고 있음을 알 수 있다.  
