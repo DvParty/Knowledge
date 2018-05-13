@@ -229,11 +229,67 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
         }
         ```
         위 샘플 코드를 실행하면 다음과 같은 결과를 얻을 수 있다.  
-        ![thread_motivation_process_case](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/thread_java_case.png?raw=true)  
+        ![thread_sample_code_result](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/thread_sample_code_result.png?raw=true)  
         -> 실행 결과를 보면 서로 다른 두개의 Thread가 같은 시간에 실행 됨을 알 수 있다.  
         -> Runnable Interface를 상속받은 객체는 별도의 Thread를 통해 실행된다.  
         -> Thread Class를 상속받은 객체는 그 자체로 Thread이다.
 
-    - 다중 쓰레드 환경에서 쓰레드는 어떻게 생성할까? 위 예시 처럼 Task별로 Thread를 할당할 것인가?
+    - Thread Pool
+        - 다중 쓰레드 환경에서 쓰레드는 어떻게 생성할까? 위 예시 처럼 Task별로 Thread를 할당할 것인가?
         - 앞서 설명한 바와 같이 이러한 환경에서는 Thread Pool을 사용하는 것이 효과적이다.
-        - 
+        - Thread Pool이란 미리 생성한 Thread들의 집합으로, Thread를 생성할 때 소비되는 불필요한 비용을 절감할 수 있다.
+        - 물론 Task의 수를 고려하지 않고 무작정 Thread Pool의 사이즈를 크게 할 경우 불필요한 메모리 낭비를 발생할 수 있으며, 노는thread 가 발생할 수도 있다.
+        - 다음은 10개의 Runnable task에 대해 사이즈 2의 Thread Pool이 Task들을 실행하는 샘플코드이다.
+
+        ```java
+        public class RunnableForThreadPool implements Runnable{
+
+            private int nTask;
+
+            public RunnableForThreadPool(int nTask){
+                this.nTask = nTask;
+            }
+
+            @Override
+            public void run() {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy MM:mm:ss");
+
+                String tName = Thread.currentThread().getName();
+                Long threadId = Thread.currentThread().getId();
+
+
+                for(int i = 0; i < 2; i++) {
+            System.out.println("TaskNumber:" + this.nTask + " [" + dateFormat.format(System.currentTimeMillis()) + "]" + tName + "::::[ThreadId]::" + threadId + "::LOOP-" + i);
+        }
+            }
+        }
+        ```
+        ```java
+        public class Main {
+
+            public static void main(String[] args){
+
+                // Thread Pool
+                ExecutorService executorService = Executors.newFixedThreadPool(3);  // MAX Thread number: 3
+
+                // Execute 10 implementsRunnable by executorService
+                for(int i = 0; i < 10; i++){
+                    RunnableForThreadPool runnableForThreadPool = new RunnableForThreadPool(i);
+
+                    executorService.execute(runnableForThreadPool);
+
+                    try{
+                        Thread.sleep(500);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+                executorService.shutdown();
+            }
+        }
+        ```
+        위 샘플 코드를 실행하면 다음과 같은 결과를 얻을 수 있다.  
+        ![thread_sample_code_result](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/thread_sample_code_pool_result.png?raw=true)  
+        -> 위 샘플 Thread Pool의 사이즈는 3으로 지정했다.  
+        -> 실행 결과를 보면 10개의 task에 대하여 단 3개의 Thread가 실행되고 있음을 알 수 있다.  
