@@ -161,10 +161,10 @@
 3. Sample Code  
 JAVA는 기본적으로 Multi Thread를 지원한다.  
     ![thread_java_case](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/thread_java_case.png?raw=true)   
-    - 하나의 객체를 n개의 Thread가 공유하는 방식.
-    - 객체 하나당 하나의 Thread가 존재하는 방식
-    - task별 Thread 생성
-    
+    - 하나의 객체를 n개의 Thread가 공유하는 방식(implements Runnable).
+    - 객체 하나당 하나의 Thread가 존재하는 방식(extends Thread).
+    - task별 Thread 생성.
+
         ```java
         public class ExtendsThread extends Thread {
 
@@ -173,12 +173,13 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy MM:mm:ss");
 
                 String tName = Thread.currentThread().getName();
+                Long threadId = Thread.currentThread().getId();
 
                 for(int i = 0; i < 10; i++){
-                    System.out.println("[" + dateFormat.format(System.currentTimeMillis()) + "]" + tName + "::::" + i);
+                    System.out.println(i + " [" + dateFormat.format(System.currentTimeMillis()) + "]" + tName + "::::[ThreadId]::" + threadId);
 
                     try{
-                        Thread.sleep(500);
+                        Thread.sleep(1000);
                     }catch(Exception e){
                         e.printStackTrace();
                     }
@@ -186,7 +187,7 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
             }
         }
         ```
-        Thread Class를 상속하여 생석한 쓰레드는 그 자체로 쓰레드 객체이다.
+        Thread Class를 상속하여 생성한 쓰레드는 그 자체로 쓰레드 객체이다.
         
         ```java
         public class ImplementsRunnable implements Runnable{
@@ -196,12 +197,13 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy MM:mm:ss");
 
                 String tName = Thread.currentThread().getName();
+                Long threadId = Thread.currentThread().getId();
 
                 for(int i = 0; i < 10; i++){
-                    System.out.println("[" + dateFormat.format(System.currentTimeMillis()) + "]" + tName + "::::" + i);
+                    System.out.println(i + " [" + dateFormat.format(System.currentTimeMillis()) + "]" + tName + "::::[ThreadId]::" + threadId);
 
                     try{
-                        Thread.sleep(500);
+                        Thread.sleep(1000);
                     }catch(Exception e){
                         e.printStackTrace();
                     }
@@ -227,4 +229,11 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
         }
         ```
         위 샘플 코드를 실행하면 다음과 같은 결과를 얻을 수 있다.  
-        ![thread_motivation_process_case](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/thread_sample_code_result.png?raw=true)
+        ![thread_motivation_process_case](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/thread_java_case.png?raw=true)  
+        -> 실행 결과를 보면 서로 다른 두개의 Thread가 같은 시간에 실행 됨을 알 수 있다.  
+        -> Runnable Interface를 상속받은 객체는 별도의 Thread를 통해 실행된다.  
+        -> Thread Class를 상속받은 객체는 그 자체로 Thread이다.
+
+    - 다중 쓰레드 환경에서 쓰레드는 어떻게 생성할까? 위 예시 처럼 Task별로 Thread를 할당할 것인가?
+        - 앞서 설명한 바와 같이 이러한 환경에서는 Thread Pool을 사용하는 것이 효과적이다.
+        - 
