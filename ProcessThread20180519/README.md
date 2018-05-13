@@ -239,7 +239,7 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
         - 앞서 설명한 바와 같이 이러한 환경에서는 Thread Pool을 사용하는 것이 효과적이다.
         - Thread Pool이란 미리 생성한 Thread들의 집합으로, Thread를 생성할 때 소비되는 불필요한 비용을 절감할 수 있다.
         - 물론 Task의 수를 고려하지 않고 무작정 Thread Pool의 사이즈를 크게 할 경우 불필요한 메모리 낭비를 발생할 수 있으며, 노는thread 가 발생할 수도 있다.
-        - 다음은 10개의 Runnable task에 대해 사이즈 2의 Thread Pool이 Task들을 실행하는 샘플코드이다.
+        - 다음은 10개의 Runnable task에 대해 사이즈 3의 Thread Pool이 10개의 Task를 실행하는 샘플코드이다.
 
         ```java
         public class RunnableForThreadPool implements Runnable{
