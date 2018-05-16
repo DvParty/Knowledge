@@ -9,8 +9,9 @@ public class ImplementsRunnable implements Runnable{
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy MM:mm:ss");
 
         String tName = Thread.currentThread().getName();
-        Long threadId = Thread.currentThread().getId();
 
+        /*
+        // Runnable Example
         for(int i = 0; i < 10; i++){
             System.out.println(i + " [" + dateFormat.format(System.currentTimeMillis()) + "]" + tName + "::::[ThreadId]::" + threadId);
 
@@ -20,5 +21,10 @@ public class ImplementsRunnable implements Runnable{
                 e.printStackTrace();
             }
         }
+        */
+
+        // Synchronization Example
+        MethodSync methodSync = new MethodSync(dateFormat.format(System.currentTimeMillis()), tName);
+        methodSync.test();
     }
 }
