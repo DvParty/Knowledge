@@ -360,7 +360,7 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
             ```
         - Main에서는 3개의 쓰레드로 동기화된 메소드 MethodSync.test()를 호출한다. 실행결과는 다음과 같다.  
         ![synchronized](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/synchronized.png?raw=true)  
-        동기화 한 메소드 test()가 종료 되서야 다음 쓰레드가 실행 됨을 확인할 수 있다.
+        동기화 한 메소드 test()가 종료 되서야 다음 쓰레드가 수행 됨을 확인할 수 있다.
 
         - 만약 synchronized 키워드를 뺀다면 다음과 같은 실행 결과를 얻는다.  
         ![synchronized](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/non_synchronized.png?raw=true)  
