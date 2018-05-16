@@ -320,3 +320,48 @@ JAVA는 기본적으로 Multi Thread를 지원한다.
             * Process 종료 시 다시 Mutex를 변경하여 임계구역이 free임을 표시한다.
             * C에서는 Mutex, Semaphore 자료구조를 라이브러리로 제공하고 있으며, JAVA에서는 synchronized 키워드로 동기화를 구현한다.
         - 임계영역과 세마포어를 쉽게 설명하기 위해 임계영역은 화장실, 세마포어는 화장실의 열쇠로 많이 비유한다.
+
+    - Sample Code
+        - JAVA는 synchronized 키워드를 붙여 사용한다.
+        - 한 Thread가 synchronized 블럭에 들어가면 해당 객체 전체에 lock이 걸려, synchronized 블럭을 벗어날 때까지 다른 쓰레드들은 이 객체에 접근할 수 없다.
+        - 해당 sample code는 MethodSync라는 객체의 test 메소드에 동기화를 해준 상태이다.
+            ```java
+            public class MethodSync {
+
+                private String curDate;
+                private String tName;
+
+                public MethodSync(String curDate, String tName) {
+                    this.curDate = curDate;
+                    this.tName = tName;
+                }
+
+                public synchronized void test(){
+                    for(int i = 0; i < 5; i++) {
+                        System.out.println("[" + curDate + "] " + tName);
+                    }
+                }
+            }
+            ```  
+        - Runnable 객체에서 동기화하는 메소드를 호출한다.
+            ```java
+            public class ImplementsRunnable implements Runnable{
+
+                @Override
+                public void run() {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy MM:mm:ss");
+
+                    String tName = Thread.currentThread().getName();
+
+                    MethodSync methodSync = new MethodSync(dateFormat.format(System.currentTimeMillis()), tName);
+                    methodSync.test();
+                }
+            }
+            ```
+        - Main에서는 3개의 쓰레드로 동기화된 메소드 MethodSync.test()를 호출한다. 실행결과는 다음과 같다.  
+        ![synchronized](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/synchronized.png?raw=true)  
+        동기화 한 메소드 test()가 종료 되서야 다음 쓰레드가 실행 됨을 확인할 수 있다.
+
+        - 만약 synchronized 키워드를 뺀다면 다음과 같은 실행 결과를 얻는다.  
+        ![synchronized](https://steemitimages.com/500x0//https://github.com/DvParty/Knowledge/blob/ssipflow/ProcessThread20180519/imgs/non_synchronized.png?raw=true)  
+        동기화를 하지 않으면 메소드가 실행중임에도 다른 쓰레드에서 동시에 실행된다.
