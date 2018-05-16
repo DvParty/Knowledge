@@ -19,6 +19,7 @@ public class Main {
         extendsThread.start();
         */
 
+        /*
         // Thread Pool
         ExecutorService executorService = Executors.newFixedThreadPool(3);  // MAX Thread number: 3
 
@@ -36,5 +37,20 @@ public class Main {
         }
 
         executorService.shutdown();
+        */
+
+
+        // Synchronization
+        ImplementsRunnable syncRunnable0 = new ImplementsRunnable();
+        ImplementsRunnable syncRunnable1 = new ImplementsRunnable();
+        ImplementsRunnable syncRunnable2 = new ImplementsRunnable();
+
+        Thread t0 = new Thread(syncRunnable0, "syncRunnable0");
+        Thread t1 = new Thread(syncRunnable1, "syncRunnable1");
+        Thread t2 = new Thread(syncRunnable2, "syncRunnable2");
+
+        t0.start();
+        t1.start();
+        t2.start();
     }
 }
