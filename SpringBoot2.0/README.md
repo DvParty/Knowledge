@@ -11,4 +11,5 @@ Spring MVC를 마지막으로 사용한 날로부터 어느덧 1년이 넘게 �
 기존 Spring MVC 에서는 웹 컨테이너에 빌드되어 웹서버 구동 시 컨테이너에 포함된 모든 프로그램이 웹서버에 실행되었다면, Spring Boot는 각각 독립된 컨테이너에 빌드되어 해당 프로그램을 실행하기 때문에 클라우드 환경에서의 마이크로서비스, Docker와 같은 컨테이너 환경에서 사용하기 좋습니다. 여기에 Nexflix OSS를 결합한 Spring Cloud는 마이크로 서비스에 필요한 API gateway, Service Discovery, High Availability 등 을 지원합니다.
 
 ### Spring Boot2.0 - 음? 내가 알던거랑 많이 달라졌네?
-Reactive, Web-Flux(RestTemplate의 deprecate...) 이 부분은 공부를 더 한 뒤에 정리하는것으로...
+Reactive, Web-Flux(RestTemplate의 deprecate...) 이 부분은 공부를 하면서 계속 정리하는것으로...  
+Spring 5와 Spring Boot 2.0의 가장 큰 변화는 **Reactive**라고 합니다. 내일은 피보탈의 김민석님의 slide share 자료를 바탕으로 정리를 해야겠습니다.
