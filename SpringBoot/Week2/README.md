@@ -25,4 +25,4 @@ com
 ```
 
 ## 본격적으로 시작하기
-1. http://start.spring.io 에서 프로젝트 생성하기
+1. http://start.spring.io 에서 프로젝트 생성하기 
